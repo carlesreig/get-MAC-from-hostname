@@ -16,19 +16,19 @@ ping %targetDevice% -n 1 -4 | for /f "tokens=3" %%a in ('findstr TTL') do @echo 
 :: comanda anterior retorna -> 192.168.1.1:
 :: haurem de treure els dos punts finals
 :: set targetDevice=!targetDevice:~0,-1!
-set targetDevice=%targetDevice:~0,-2%
+::set targetDevice=%targetDevice:~0,-1%
 :: retorna 192.168.1.1:
-:: 192.168.1 <- valor actual de la variable %targetDevice%
+:: 192.168.1. <- valor actual de la variable %targetDevice%
 :: No se encontraron entradas ARP.
 :: trobar MAC des de IP -> arp -a <ipaddress>
 echo %targetDevice%
 arp -a %targetDevice%
 color
 pause
-eof
+exit
 :PREGUNTA
 echo Type target hostname or IP from LAN
 set /p targetDevice=
 goto :RESPOSTA
 pause
-exit
+eof
