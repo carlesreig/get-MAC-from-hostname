@@ -8,20 +8,27 @@ color 1B
 if "%1"=="" GOTO PREGUNTA
 :RESPOSTA
 set targetDevice=%1
-:: if "%targetDevice"== "" echo missing hostname or IP | goto PREGUNTA
 :: ping -n 1 -4 %targetDevice% --> fa un sol ping amb IPV4
-(for /f "skip=1 tokens=3 delims=" %F in ('ping -n 1 %%targetDevice%%') do @if not defined _A @echo %F&set _A=0) &set "_A="
+:: (for /f "skip=1 tokens=3 delims=" %F in ('ping -n 1 %%targetDevice%%') do @if not defined _A @echo %F&set _A=0) &set "_A="
 :: token=3, el que ens interessa
-:: ping 127.0.0.1 | for /f "skip=3 tokens=3" %a in ('findstr Respuesta') do @echo %a
-:: comanda anterior retorna -> 127.0.0.1:
+:: ping 127.0.0.1 -n 1 -4 | for /f "tokens=3" %a in ('findstr TTL') do @echo %a
+ping %targetDevice% -n 1 -4 | for /f "tokens=3" %%a in ('findstr TTL') do @echo %%a
+:: comanda anterior retorna -> 192.168.1.1:
 :: haurem de treure els dos punts finals
+:: set targetDevice=!targetDevice:~0,-1!
+set targetDevice=%targetDevice:~0,-2%
+:: retorna 192.168.1.1:
+:: 192.168.1 <- valor actual de la variable %targetDevice%
+:: No se encontraron entradas ARP.
 :: trobar MAC des de IP -> arp -a <ipaddress>
-pause
+echo %targetDevice%
+arp -a %targetDevice%
 color
+pause
 eof
 :PREGUNTA
-echo Type target hostname-IP from LAN
+echo Type target hostname or IP from LAN
 set /p targetDevice=
 goto :RESPOSTA
 pause
-eof
+exit
