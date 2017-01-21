@@ -3,7 +3,7 @@
 ::twitter -> @carlesreig
 ::blog -> www.carlesreig.com
 @ECHO OFF
-::SETLOCAL ENABLEEXTENSIONS enabledelayedexpansion
+SETLOCAL ENABLEEXTENSIONS
 TITLE get MAC from hostname/IP
 ::if no parameter "%1" is set then asks for it
 IF "%1"=="" GOTO PREGUNTA
