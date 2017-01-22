@@ -1,0 +1,3 @@
+# get-MAC-from-hostname
+
+simple script to get MAC address from a hostname at local network. It can also get a MAC from an IP, but maybe you don't need this script to do so...
