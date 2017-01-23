@@ -1,5 +1,8 @@
 # get-MAC-from-hostname.bat
 
+## Author
+Carles Reig, https://twitter.com/carlesreig, http://www.carlesreig.com
+
 ## Windows batch script (cmd)
 Simple windows batch script to get MAC phisical address from a hostname at local network. It can also get a MAC from an IP, but maybe you don't need this script to do so...
 
